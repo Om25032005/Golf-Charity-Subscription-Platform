@@ -28,19 +28,29 @@ const app = express();
 app.use(helmet());
 
 // ─── CORS FIX (IMPORTANT) ─────────────────────────────────────────
-console.log("CLIENT_URL from ENV:", process.env.CLIENT_URL);
+const cors = require("cors");
 
-const allowedOrigin = process.env.CLIENT_URL;
+const allowedOrigins = [
+    process.env.CLIENT_URL,
+    "http://localhost:3000"
+];
 
-app.use(
-    cors({
-        origin: allowedOrigin,
-        credentials: true,
-        methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
-        allowedHeaders: ['Content-Type', 'Authorization'],
-    })
-);
+app.use(cors({
+    origin: function (origin, callback) {
+        console.log("Request origin:", origin);
+        console.log("Allowed origins:", allowedOrigins);
 
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("CORS not allowed"));
+        }
+    },
+    credentials: true
+}));
+
+// ✅ VERY IMPORTANT (handles preflight)
+app.options("*", cors());
 // ─── Stripe Webhook (must be before json parser) ──────────────────
 app.post(
     '/api/subscriptions/webhook',
