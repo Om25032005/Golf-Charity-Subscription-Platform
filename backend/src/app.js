@@ -108,7 +108,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // ─── 404 Handler ──────────────────────────────────────────────────
-app.all('/{*path}', (req, res, next) => {
+app.all('*', (req, res, next) => {
     next(new AppError(`Cannot find ${req.method} ${req.originalUrl} on this server.`, 404));
 });
 
