@@ -28,8 +28,6 @@ const app = express();
 app.use(helmet());
 
 // ─── CORS FIX (IMPORTANT) ─────────────────────────────────────────
-const cors = require("cors");
-
 const allowedOrigins = [
     process.env.CLIENT_URL,
     "http://localhost:3000"
