@@ -48,7 +48,7 @@ app.use(cors({
 }));
 
 // ✅ VERY IMPORTANT (handles preflight)
-app.options("*", cors());
+app.options('/{*path}', cors());
 // ─── Stripe Webhook (must be before json parser) ──────────────────
 app.post(
     '/api/subscriptions/webhook',
