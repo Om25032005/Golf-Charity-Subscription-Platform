@@ -1,6 +1,7 @@
 # Golf Charity Subscription Platform
 
 A full-stack MERN (MongoDB, Express, React, Node.js) web application designed for a charitable subscription service. Users can subscribe via Stripe, submit lottery-style numbers, and participate in monthly draws where a portion of the prize pool is donated to a selected charity.
+Link : https://golf-charity-subscription-platform-beryl.vercel.app/login
 
 ## 🌟 Key Features
 
